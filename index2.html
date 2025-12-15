@@ -58,12 +58,14 @@
             display: flex;
             flex-direction: column;
             overflow: hidden;
-            transition: transform 0.2s ease-in-out;
+            /* Theme Tweak 3: Subtle scale hover effect */
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
         }
 
         .bento-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            /* Applied scale (zoom) effect */
+            transform: scale(1.01); 
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
         }
 
         .card-title {
@@ -82,38 +84,71 @@
         /* Specific Card Styles & Mobile Sizing */
         .card-1 { /* Profile - Large box */
             min-height: 250px;
+            /* --- START BACKGROUND IMAGE STYLES FOR CARD 1 --- */
+            background-image: url('bg.jpg.jpg'); /* 1. Set the image path */
+            background-size: cover;          /* 2. Scale image to cover the entire card */
+            background-position: center;     /* 3. Center the image */
+            position: relative; 
+            z-index: 0;
+            /* Set a minimum height for mobile to ensure the image is visible */
+            min-height: 300px; 
+            /* --- END BACKGROUND IMAGE STYLES FOR CARD 1 --- */
         }
 
+        /* Dark overlay for text readability */
+        .card-1::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.35); /* 35% black overlay */
+            border-radius: var(--border-radius);
+            z-index: -1; /* Place behind content */
+        }
+        
         .card-1 .card-content {
             flex-grow: 1;
         }
+        
+        /* Ensure all text within card-1 is white for contrast against the image */
+        .card-1 .card-content, 
+        .card-1 .card-title, 
+        .card-1 h2, 
+        .card-1 em {
+            color: #FFFFFF; 
+            z-index: 1; /* Bring text above the overlay */
+        }
 
+        /* Functional Link 1: Social Links */
         .card-1 .social-links a {
-            color: var(--color-accent);
+            color: #FFFFFF; /* Ensure link color is white */
             text-decoration: none;
             font-weight: 600;
             margin-right: 15px;
             font-size: 0.95rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+            padding-bottom: 2px;
+            z-index: 1;
         }
         
         .card-1 h2 {
             font-size: 1.8rem;
             margin-top: 0;
             margin-bottom: 5px;
-            color: var(--color-text-primary);
         }
 
         .card-1 em {
             display: block;
             font-size: 1rem;
-            color: var(--color-accent);
             font-style: normal;
             font-weight: 500;
             margin-bottom: 15px;
         }
 
 
-        .card-2, .card-5 { /* Location, Hobby - Small box */
+        .card-2, .card-5, .card-7 { /* Location, Hobby, Reflection - Small box */
             min-height: 120px;
             justify-content: center;
             align-items: flex-start;
@@ -149,17 +184,30 @@
 
             .card-4 { /* Case Study: Medium - 2x1 */
                 grid-column: span 2;
-                grid-row: span 1;
+                grid-row: span 1; 
             }
-
+            
+            /* Card 5 (Hobby) and Card 7 (Reflection) share the second row, columns 3 and 4 */
             .card-5 { /* Hobby: Small - 1x1 */
                 grid-column: span 1;
-                grid-row: span 1;
+                grid-row: 2; /* Positioned next to Card 4 and below Card 2 */
+            }
+
+            .card-7 { /* Reflection: Small - 1x1 (New Card) */
+                grid-column: span 1;
+                grid-row: 2; /* Positioned next to Card 5 */
             }
 
             .card-6 { /* Playlist: Wide - 4x1 */
                 grid-column: span 4;
                 grid-row: span 1;
+            }
+        }
+        
+        /* Mobile adjustment for new card (stacked layout) */
+        @media (max-width: 767px) {
+            .card-7 {
+                order: 6; /* Place the new card logically towards the bottom of the stack */
             }
         }
 
@@ -185,9 +233,9 @@
                     <p>Focused on fundamental botany, ecology, and sustainable agriculture techniques.</p>
                 </div>
                 <div class="social-links">
-                    <a href="#">LinkedIn</a>
-                    <a href="#">GitHub</a>
-                    <a href="#">UMT Portal</a>
+                    <a href="#" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+                    <a href="#" target="_blank" rel="noopener noreferrer">GitHub</a>
+                    <a href="#" target="_blank" rel="noopener noreferrer">UMT Portal</a>
                 </div>
             </div>
 
@@ -195,7 +243,7 @@
                 <div class="card-title">Current Location</div>
                 <div class="card-content">
                     <p><strong>Campus:</strong> UMT, Kuala Nerus</p>
-                    <p>Local Time: <span class="content-highlight">Monday, 10:46 AM (UTC+8)</span></p>
+                    <p>Local Time: <span class="content-highlight">Monday, 12:11 PM (UTC+8)</span></p>
                 </div>
             </div>
 
@@ -227,6 +275,13 @@
                     <p>Taking <span class="content-highlight">Evening walks at Pantai UMT</span> to observe coastal vegetation and marine ecology.</p>
                 </div>
             </div>
+            
+            <div class="bento-card card-7">
+                <div class="card-title">Why Plant Science Matters in Malaysia</div>
+                <div class="card-content">
+                    <p>Sustainable **crop resilience** is crucial for our future. By optimizing local **soil health** and understanding plant-environment interactions, we can secure food supply and biodiversity.</p>
+                </div>
+            </div>
 
             <div class="bento-card card-6">
                 <div class="card-title">Study Focus Playlist</div>
@@ -239,4 +294,4 @@
         </div>
     </div>
 </body>
-</html>
+</html>  
