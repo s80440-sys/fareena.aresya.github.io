@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Bento Landing Page</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    <style>
+        /*
+        * Technical Rules Compliance:
+        * 1. Single HTML file with internal CSS: Yes.
+        * 2. Fully responsive (Grid on desktop, stack on mobile): Yes, using media queries.
+        * 3. Modern sans-serif font: Inter.
+        * 4. Clean, scientific color palette: White (#FFFFFF), Soft Grey (#F7F7F7, #EAEAEA), Accent Color (Deep Ocean Blue: #004D99).
+        */
+
+        :root {
+            --color-background: #F7F7F7;
+            --color-card-background: #FFFFFF;
+            --color-text-primary: #1A1A1A;
+            --color-text-secondary: #666666;
+            --color-accent: #004D99; /* Deep Ocean Blue (UMT Theme) */
+            --color-border: #EAEAEA;
+            --border-radius: 12px;
+            --padding-base: 20px;
+        }
+
+        /* Base Styles */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--color-background);
+            color: var(--color-text-primary);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            min-height: 100vh;
+            box-sizing: border-box;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px; /* Max desktop width */
+        }
+
+        /* Bento Grid Styles */
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(1, 1fr); /* Mobile default: single column */
+            gap: 16px;
+        }
+
+        .bento-card {
+            background-color: var(--color-card-background);
+            border: 1px solid var(--color-border);
+            border-radius: var(--border-radius);
+            padding: var(--padding-base);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            transition: transform 0.2s ease-in-out;
+        }
+
+        .bento-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: var(--color-text-primary);
+        }
+
+        .card-content {
+            font-size: 1rem;
+            color: var(--color-text-secondary);
+            line-height: 1.5;
+        }
+
+        /* Specific Card Styles & Mobile Sizing */
+        .card-1 { /* Profile - Large box */
+            min-height: 250px;
+        }
+
+        .card-1 .card-content {
+            flex-grow: 1;
+        }
+
+        .card-1 .social-links a {
+            color: var(--color-accent);
+            text-decoration: none;
+            font-weight: 600;
+            margin-right: 15px;
+            font-size: 0.95rem;
+        }
+        
+        .card-1 h2 {
+            font-size: 1.8rem;
+            margin-top: 0;
+            margin-bottom: 5px;
+            color: var(--color-text-primary);
+        }
+
+        .card-1 em {
+            display: block;
+            font-size: 1rem;
+            color: var(--color-accent);
+            font-style: normal;
+            font-weight: 500;
+            margin-bottom: 15px;
+        }
+
+
+        .card-2, .card-5 { /* Location, Hobby - Small box */
+            min-height: 120px;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        .card-6 { /* Playlist - Wide box */
+            min-height: 100px;
+            justify-content: center;
+        }
+
+        /* Desktop Layout (Bento Grid) */
+        @media (min-width: 768px) {
+            .bento-grid {
+                grid-template-columns: repeat(4, 1fr); /* 4-column base grid */
+                grid-auto-rows: minmax(120px, auto); /* Consistent row height for better layout */
+            }
+
+            /* Card Sizing (Desktop) */
+            .card-1 { /* Profile: Large - 2x2 */
+                grid-column: span 2;
+                grid-row: span 2;
+            }
+
+            .card-2 { /* Location: Small - 1x1 */
+                grid-column: span 1;
+                grid-row: span 1;
+            }
+
+            .card-3 { /* Tech Stack: Medium - 1x2 */
+                grid-column: span 1;
+                grid-row: span 2;
+            }
+
+            .card-4 { /* Case Study: Medium - 2x1 */
+                grid-column: span 2;
+                grid-row: span 1;
+            }
+
+            .card-5 { /* Hobby: Small - 1x1 */
+                grid-column: span 1;
+                grid-row: span 1;
+            }
+
+            .card-6 { /* Playlist: Wide - 4x1 */
+                grid-column: span 4;
+                grid-row: span 1;
+            }
+        }
+
+        /* Utility/Content styles */
+        .content-highlight {
+            font-weight: 600;
+            color: var(--color-text-primary);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="bento-grid">
+
+            <div class="bento-card card-1">
+                <div class="card-title">Profile Overview</div>
+                
+                <h2>Fareena Aresya</h2>
+                <em>'Plant growing'</em>
+
+                <div class="card-content">
+                    <p>I am a highly motivated student specializing in **Plant Science**, currently in **Year 1** of my program at UMT.</p>
+                    <p>Focused on fundamental botany, ecology, and sustainable agriculture techniques.</p>
+                </div>
+                <div class="social-links">
+                    <a href="#">LinkedIn</a>
+                    <a href="#">GitHub</a>
+                    <a href="#">UMT Portal</a>
+                </div>
+            </div>
+
+            <div class="bento-card card-2">
+                <div class="card-title">Current Location</div>
+                <div class="card-content">
+                    <p><strong>Campus:</strong> UMT, Kuala Nerus</p>
+                    <p>Local Time: <span class="content-highlight">Monday, 10:46 AM (UTC+8)</span></p>
+                </div>
+            </div>
+
+            <div class="bento-card card-3">
+                <div class="card-title">Core Subjects & Skills</div>
+                <div class="card-content">
+                    <p>Current academic and practical skills include:</p>
+                    <ul>
+                        <li><span class="content-highlight">Soil Science:</span> Analysis of composition and nutrient cycling.</li>
+                        <li><span class="content-highlight">Microbiology:</span> Role of microbes in plant health and disease.</li>
+                        <li><span class="content-highlight">Data Analysis (Excel):</span> Organizing and interpreting field data.</li>
+                        <li><span class="content-highlight">Lab Analysis:</span> Basic techniques for plant tissue and soil testing.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="bento-card card-4">
+                <div class="card-title">Case Study Focus</div>
+                <div class="card-content">
+                    <p><span class="content-highlight">Title:</span> Rock Mineral</p>
+                    <p><strong>Description:</strong> Analyzing texture profiles of Rock Mineral samples collected from various sites. Evaluating particle size distribution and chemical weathering effects.</p>
+                </div>
+            </div>
+
+            <div class="bento-card card-5">
+                <div class="card-title">Campus Life</div>
+                <div class="card-content">
+                    <p>Relaxation/Activity:</p>
+                    <p>Taking <span class="content-highlight">Evening walks at Pantai UMT</span> to observe coastal vegetation and marine ecology.</p>
+                </div>
+            </div>
+
+            <div class="bento-card card-6">
+                <div class="card-title">Study Focus Playlist</div>
+                <div class="card-content">
+                    <p><strong>Currently Listening:</strong> Nature Sounds & Ambient Study Music</p>
+                    <p>Placeholder for an embedded music player or latest track info.</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</body>
+</html>
